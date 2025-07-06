@@ -252,11 +252,16 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
             }
             
             if isListAboveInputView {
-                listWithButton
-                if let builder = betweenListAndInputViewBuilder {
-                    builder()
+                ZStack {
+                    listWithButton
+                    if let builder = betweenListAndInputViewBuilder {
+                        builder()
+                    }
+                    VStack {
+                        Spacer()
+                        inputView
+                    }
                 }
-                inputView
             } else {
                 inputView
                 if let builder = betweenListAndInputViewBuilder {
@@ -292,7 +297,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
     var listWithButton: some View {
         switch type {
         case .conversation:
-            ZStack(alignment: .bottomTrailing) {
+            ZStack(alignment: .bottom) {
                 list
                 
                 if !isScrolledToBottom {
@@ -306,7 +311,7 @@ public struct ChatView<MessageContent: View, InputViewContent: View, MenuAction:
                             .shadow(color: .primary.opacity(0.1), radius: 2, y: 1)
                     }
                     .padding(.trailing, MessageView.horizontalScreenEdgePadding)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 74)
                 }
             }
             
